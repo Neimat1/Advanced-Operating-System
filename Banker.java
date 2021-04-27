@@ -217,11 +217,11 @@ public class Banker {
             }
         }
         if(i==R){
-                for(int x=0;x<R;x++){
-                    availableCopy[x]+=release[x];
-                    allocatedCopy[processnumber][x]-=release[x];
-                    needCopy[processnumber][x]+=release[x];
-                }
+            for(int x=0;x<R;x++){
+                availableCopy[x]+=release[x];
+                allocatedCopy[processnumber][x]-=release[x];
+                needCopy[processnumber][x]+=release[x];
+            }
             allocated=allocatedCopy;
             available=availableCopy;
             need=needCopy;
@@ -244,13 +244,6 @@ public class Banker {
 
 
     }
-    void enterPositive(int num){
-        while(num<0){
-            System.out.println("Enter positive number :-");
-            Scanner input=new Scanner(System.in);
-            num= input.nextInt();
-        }
-    }
     ////////////////////////
     public static void main(String[] args) {
         // Test Program
@@ -265,12 +258,12 @@ public class Banker {
         Scanner input=new Scanner(System.in);
         Scanner inputString=new Scanner(System.in);
         for(int i=0;i<R;i++){
-           av[i]=input.nextInt();
+            av[i]=input.nextInt();
         }
         System.out.println("Enter the initial initial number of the allocated resources :- ");
         for(int i=0;i<P;i++){
             for(int j=0;j<R;j++)
-               al[i][j]=input.nextInt();
+                al[i][j]=input.nextInt();
         }
         System.out.println("Enter the initial initial number of the max needed resources :- ");
         for(int i=0;i<P;i++){
@@ -290,48 +283,48 @@ public class Banker {
                 System.out.print(" P"+B.sequence[i]);
             }
             System.out.println("\n");
-            while(true){
-                String command=inputString.nextLine();
-                if(command.equals("Quit")){
-                    exit(0);
-                }
-                else{
-                    String []commandSpliter =command.split(" ");
-                    if(commandSpliter[0].equals("RQ")){
-                        if(commandSpliter.length!=R+2||parseInt((commandSpliter[1]).substring(1))>=P)
-                            System.out.println("Something Error :/");
-                        else{
-                            int counter=0;
-                            for(int i=2;i<commandSpliter.length;i++){
-                                request[counter]=parseInt(commandSpliter[i]);
-                                counter++;
-                            }
-                            B.request(request,parseInt((commandSpliter[1]).substring(1)));
-                        }
-                    }
-                    else if(commandSpliter[0].equals("RL")){
-                        if(commandSpliter.length!=R+2||parseInt((commandSpliter[1]).substring(1))>=P)
-                            System.out.println("Something Error :/");
-                        else{
-                            int counter=0;
-                            for(int i=2;i<commandSpliter.length;i++){
-                                release[counter]=parseInt(commandSpliter[i]);
-                                counter++;
-                            }
-                            B.release(release,parseInt((commandSpliter[1]).substring(1)));
-                        }
 
-                    }
-                    else{
-                        System.out.println("Command not found :/");
-
-                    }
-                }
-
-            }
         }
         else {
             System.out.println("Unsafe!!!!!\n");
+        }
+        while(true){
+            String command=inputString.nextLine();
+            if(command.equals("Quit")){
+                exit(0);
+            }
+            else{
+                String []commandSpliter =command.split(" ");
+                if(commandSpliter[0].equals("RQ")){
+                    if(commandSpliter.length!=R+2||parseInt((commandSpliter[1]).substring(1))>=P)
+                        System.out.println("Something Error :/");
+                    else{
+                        int counter=0;
+                        for(int i=2;i<commandSpliter.length;i++){
+                            request[counter]=parseInt(commandSpliter[i]);
+                            counter++;
+                        }
+                        B.request(request,parseInt((commandSpliter[1]).substring(1)));
+                    }
+                }
+                else if(commandSpliter[0].equals("RL")){
+                    if(commandSpliter.length!=R+2||parseInt((commandSpliter[1]).substring(1))>=P)
+                        System.out.println("Something Error :/");
+                    else{
+                        int counter=0;
+                        for(int i=2;i<commandSpliter.length;i++){
+                            release[counter]=parseInt(commandSpliter[i]);
+                            counter++;
+                        }
+                        B.release(release,parseInt((commandSpliter[1]).substring(1)));
+                    }
+
+                }
+                else{
+                    System.out.println("Command not found :/");
+
+                }
+            }
 
         }
 
@@ -342,24 +335,19 @@ public class Banker {
 /* Test Program
 available
 3 3 2
-
 allocate
 0 1 0
 2 0 0
 3 0 2
 2 1 1
 0 0 2
-
 max
 7 5 3
 3 2 2
 9 0 2
 2 2 2
 4 3 3
-
 RQ p0 1 0 2
 RL p0 0 1 0
-
 Quit
-
  */
